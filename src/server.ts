@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 
-dotenv.config({ path: 'config.env' });
+
+dotenv.config({ path: __dirname + '/config.env' });
 
 const connectDB = async () => {
-    const database = process.env.DATABASE || "mongodb://localhost:27017/AuthDB";
-    console.log(database);
+    const database = process.env.DATABASE as string;
     await mongoose.connect(database, {})
         .then((connection) => {
             console.log("DB connection successful");
