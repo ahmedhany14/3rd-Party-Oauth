@@ -1,6 +1,7 @@
 import express from 'express';
 import { passport } from './../GoogleStrategyConfig/GoogleConfig';
-
+import { Generator } from './../Controller/GenTokenSign'
+import { protect } from './../middelware/protect';
 const router = express.Router();
 
 /*
@@ -20,11 +21,10 @@ router.get('/google',
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-        res.status(200).json({
-            message: 'User authenticated',
-            user: req.user,
-            is_auth: req.isAuthenticated()
-        });
+        Generator(req.user, 200, res);
     }
 )
+
+router.get('/me', protect)
+
 export { router as loginRouter };

@@ -14,12 +14,10 @@ const connectDB = async () => {
         });
 };
 
-
-
 import { app } from './index';
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     connectDB();
     console.log(`Listening on port ${port}, to view the app, open this link in your browser http://localhost:${port}`);
-})   
+})
